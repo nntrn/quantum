@@ -1,4 +1,4 @@
-# a structurally complete quantum scaffold
+# structurally complete models of quantum mechanics
 
 \# | Concept | Structural Role
 -- | :------ | :---------------
@@ -15,15 +15,107 @@
 11 | Nonlocality | Constraint propagation across separated regions
 12 | Interpretation | Structural logic behind what counts as "real" or "observable"
 
-Each of these functions independently represents a constraint-encoded quantum behavior. Together, they reconstruct a structural logic that aligns closely with known features of quantum theory—without relying on its mathematical substrate. 
 
-## 1. SymbolicSystem
+## Didactic Model
+
+Standard boilerplate, modular, and single purpose
+
+* `state_definition()` - normalized qubit state
+* `field_context()` - time evolution via unitary operator
+* `measurement()` - projection postulate and born rule
+* `superposition()` - linear combination of basis states
+* `entanglement()` - bell state construction
+* `collapse()` - stochastic projection
+* `coherence()` - simplified amplitude damping
+* `amplitude_probability()` - squared modulus of amplitudes
+* `interference()` - double-slit phase interference
+* `computation()` - application of quantum gates
+* `nonlocality()` - chsh test on bell state
+* `interpretation()` - returns wavefunction + probabilities
+
+```py
+import numpy as np
+
+def state_definition(alpha, beta):
+    # Qubit: |psi> = alpha|0> + beta|1>, must normalize
+    norm = np.sqrt(abs(alpha)**2 + abs(beta)**2)
+    return np.array([alpha, beta]) / norm
+
+def field_context(H, psi, t):
+    # Time evolution: psi(t) = exp(-iHt/hbar) * psi(0)
+    hbar = 1
+    U = scipy.linalg.expm(-1j * H * t / hbar)
+    return U @ psi
+
+def measurement(psi, observable):
+    # Projective measurement: returns probabilities for each eigenstate
+    eigvals, eigvecs = np.linalg.eigh(observable)
+    probs = np.abs(eigvecs.T @ psi)**2
+    return dict(zip(eigvals, probs))
+
+def superposition(states, coeffs):
+    # Linear combination of states
+    psi = sum(c * s for c, s in zip(coeffs, states))
+    return psi / np.linalg.norm(psi)
+
+def entanglement():
+    # Bell state (maximally entangled): |00> + |11>
+    psi = np.zeros(4, dtype=complex)
+    psi[0] = 1/np.sqrt(2)
+    psi[3] = 1/np.sqrt(2)
+    return psi
+
+def collapse(psi, observable):
+    # Collapse to one eigenstate randomly
+    eigvals, eigvecs = np.linalg.eigh(observable)
+    probs = np.abs(eigvecs.T @ psi)**2
+    idx = np.random.choice(len(eigvals), p=probs)
+    return eigvecs[:, idx]
+
+def coherence(psi, decoherence_factor):
+    # Amplitude damping (simple decoherence model)
+    gamma = decoherence_factor
+    psi_new = np.array([psi[0], np.sqrt(1 - gamma) * psi[1]])
+    return psi_new / np.linalg.norm(psi_new)
+
+def amplitude_probability(psi):
+    # Probability amplitudes for |0> and |1>
+    return np.abs(psi)**2
+
+def interference(phase):
+    # Two-path interference: |psi> = |A> + exp(i*phase)|B>
+    psi = np.array([1, np.exp(1j * phase)])
+    return np.abs(np.sum(psi) / np.sqrt(2))**2
+
+def computation(U, psi):
+    # Apply a quantum gate/unitary
+    return U @ psi
+
+def nonlocality():
+    # Bell test: returns CHSH value for maximally entangled state
+    a = np.array([[0,1],[1,0]])
+    b = np.array([[0, -1j],[1j, 0]])
+    psi = entanglement()
+    AB = np.kron(a, b)
+    value = np.real(psi.conj().T @ AB @ psi)
+    return value
+
+def interpretation(psi):
+    # Return full wavefunction (ontic) and probabilities (epistemic)
+    return {'wavefunction': psi, 'probabilities': np.abs(psi)**2}
+```
+
+## Symbolic Model
+
+Replaces wave mechanics with structural emission logic—preserving quantum behavior through traceable symbolic interactions.
+
+### 1. SymbolicSystem
 
 Base Interface
 
 ```py
 class SymbolicSystem:
-    def emit(self, S, Δ):
+    def emit(self, S, delta):
         raise NotImplementedError
 
     def is_valid(self, S, emission_pair):
@@ -51,14 +143,14 @@ No linearity, no operator algebra, no superposition principle. Purely rule-drive
 **Readiness:**  
 Ready to serve as a modular framework. Can be extended to model field-specific behavior across collapse types or system classes.
 
-## 2. AsymmetricPrimeSystem
+### 2. AsymmetricPrimeSystem
 
 Harmonic emission with structural validation
 
 ```py
 class AsymmetricPrimeSystem(SymbolicSystem):
-    def emit(self, S, Δ):
-        return (Δ, S * Δ - 2)
+    def emit(self, S, delta):
+        return (delta, S * delta - 2)
 
     def is_valid(self, S, emissions):
         return isprime(emissions[1])
@@ -92,14 +184,14 @@ Does not model amplitude interference, entanglement, or operator-based measureme
 **Readiness:**  
 Fully ready for symbolic modeling of quantized emission and discrete collapse. Extendable for multi-path or entangled collapse conditions.
 
-## 3. SymmetricPrimeSystem
+### 3. SymmetricPrimeSystem
 
 Entangled field emission
 
 ```py
 class SymmetricPrimeSystem(SymbolicSystem):
-    def emit(self, S, Δ):
-        return (S - Δ, S + Δ)
+    def emit(self, S, delta):
+        return (S - delta, S + delta)
 
     def is_valid(self, S, emissions):
         return isprime(emissions[0]) and isprime(emissions[1])
@@ -120,18 +212,18 @@ Does not simulate entangled phase interference or partial resolution. Symmetry i
 **Readiness:**  
 Operable now as a symbolic entangled collapse field. Extendable by including shared scoring or recursive field tracing.
 
-## 4. symbolic_superposition()
+### 4. symbolic_superposition()
 
 Symbolic emission field construction
 
 ```py
-def symbolic_superposition(system, S, Δ_range):
+def symbolic_superposition(system, S, delta_range):
     candidates = []
-    for Δ in Δ_range:
-        emissions = system.emit(S, Δ)
+    for delta in delta_range:
+        emissions = system.emit(S, delta)
         if system.is_valid(S, emissions):
             score = system.score(S, emissions) if hasattr(system, 'score') else 1.0
-            candidates.append((Δ, emissions, score))
+            candidates.append((delta, emissions, score))
     return sorted(candidates, key=lambda x: x[2], reverse=True)
 ```
 
@@ -150,7 +242,7 @@ No interference or complex amplitudes. All emissions treated independently. No s
 **Readiness:**  
 Complete as a symbolic superposition builder. Extendable for joint-emission effects or decoherence modeling.
 
-## 5. symbolic_collapse()
+### 5. symbolic_collapse()
 
 Collapse resolution
 
@@ -174,16 +266,16 @@ No probabilistic sampling. No state branching. Collapse is absolute.
 **Readiness:**  
 Sufficient for symbolic systems where deterministic resolution is desired. To support probabilistic fields, scoring would need normalization and sampling.
 
-## 6. entanglement_condition()
+### 6. entanglement_condition()
 
 Structural overlap test
 
 ```py
-def entanglement_condition(S1, S2, system, Δ_range):
-    for Δ1 in Δ_range:
-        e1 = system.emit(S1, Δ1)
-        for Δ2 in Δ_range:
-            e2 = system.emit(S2, Δ2)
+def entanglement_condition(S1, S2, system, delta_range):
+    for delta1 in delta_range:
+        e1 = system.emit(S1, delta1)
+        for delta2 in delta_range:
+            e2 = system.emit(S2, delta2)
             if set(e1) & set(e2):
                 return True
     return False
@@ -204,20 +296,20 @@ No entanglement phase coherence. No density matrix formulation. No Bell inequali
 **Readiness:**  
 Valid as symbolic entanglement detector. Extendable with trace propagation and recursive interference logic.
 
-## 7. trace_collapse()
+### 7. trace_collapse()
 
 Collapse path propagation
 
 ```py
-def trace_collapse(S, system, Δ_range, depth=3):
+def trace_collapse(S, system, delta_range, depth=3):
     trace = []
-    field = symbolic_superposition(system, S, Δ_range)
+    field = symbolic_superposition(system, S, delta_range)
     collapse = symbolic_collapse(field)
     if collapse:
         trace.append(collapse)
         next_S = collapse[1][1] if len(collapse[1]) > 1 else collapse[1][0]
         if depth > 1:
-            trace.extend(trace_collapse(next_S, system, Δ_range, depth - 1))
+            trace.extend(trace_collapse(next_S, system, delta_range, depth - 1))
     return trace
 ```
 
@@ -235,4 +327,3 @@ No back-propagation or reversibility. No coherent branching.
 
 **Readiness:**  
 Use-ready for symbolic collapse modeling. Extendable with decoherence scoring, trace length entropy, or symbolic fidelity decay.
-
