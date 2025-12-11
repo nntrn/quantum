@@ -21,7 +21,7 @@ Each of these functions independently represents a constraint-encoded quantum be
 
 Base Interface
 
-```
+```py
 class SymbolicSystem:
     def emit(self, S, Δ):
         raise NotImplementedError
