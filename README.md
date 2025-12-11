@@ -1,19 +1,19 @@
 # a structurally complete quantum scaffold
 
-Concept | Structural Role
-:------ | :---------------
-1. State Definition | How entities are defined, encoded, or emitted
-2. Field Context | The environment in which states interact (space, potential, structure)
-3. Measurement | Collapse mechanism—what triggers resolution
-4. Superposition | Multiplicity of unresolved states
-5. Entanglement | Shared constraints between separate states
-6. Collapse | Selection of outcome from constraints, not randomness
-7. Coherence / Decoherence | Conditions for trace continuity or loss
-8. Amplitude / Probability | How resolution strength is computed or assigned
-9. Interference | Path compatibility—how constraints amplify or cancel
-10. Computation | Reversibility, gate logic, and field transitions
-11. Nonlocality | Constraint propagation across separated regions
-12. Interpretation | Structural logic behind what counts as "real" or "observable"
+\# | Concept | Structural Role
+-- | :------ | :---------------
+1 | State Definition | How entities are defined, encoded, or emitted
+2 | Field Context | The environment in which states interact (space, potential, structure)
+3 | Measurement | Collapse mechanism—what triggers resolution
+4 | Superposition | Multiplicity of unresolved states
+5 | Entanglement | Shared constraints between separate states
+6 | Collapse | Selection of outcome from constraints, not randomness
+7 | Coherence / Decoherence | Conditions for trace continuity or loss
+8 | Amplitude / Probability | How resolution strength is computed or assigned
+9 | Interference | Path compatibility—how constraints amplify or cancel
+10 | Computation | Reversibility, gate logic, and field transitions
+11 | Nonlocality | Constraint propagation across separated regions
+12 | Interpretation | Structural logic behind what counts as "real" or "observable"
 
 Each of these functions independently represents a constraint-encoded quantum behavior. Together, they reconstruct a structural logic that aligns closely with known features of quantum theory—without relying on its mathematical substrate. 
 
