@@ -112,7 +112,7 @@ def interpretation(psi):
 
 ## Symbolic Model
 
-Replaces wave mechanics with structural emission logic—preserving quantum behavior through traceable symbolic interactions.
+Each of these functions independently represents a constraint-encoded quantum behavior. Together, they reconstruct a structural logic that aligns closely with known features of quantum theory—without relying on its mathematical substrate.
 
 ### 1. SymbolicSystem
 
