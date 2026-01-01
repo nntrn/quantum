@@ -2,8 +2,11 @@
 
 Quantum behavior is the outcome of structural emergence not inherently tied to probability, amplitudes, or algebraically entangled.
 
-If collapse and interaction rules are modeled symbolically and causally, then quantum-like systems can be extended without physical hardware or Hilbert-space machinery.
+This attempts to pull apart the complexity behind wavefunctions.
 
+```
+wavefunction = state + weights + dependency + collapse input
+```
 
 \# | Concept | Structural Role
 -- | :------ | :---------------
